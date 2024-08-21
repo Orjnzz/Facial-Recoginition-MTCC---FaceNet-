@@ -1,0 +1,15 @@
+Các bước chạy:
+B1: Install các thư viện cần thiết: 
+" pip install -r requirements.txt "
+
+B2: thu thập ảnh dữ liệu User: 
+"src\face_take_dataset"
+
+B3: Tách dữ liệu khuôn mặt từ dữ liệu thô vừa chụp được và lưu vào file processed: 
+" src/align_dataset_mtcnn.py Dataset/FaceData/raw Dataset/FaceData/processed --image_size 160 --margin 32 --random_order --gpu_memory_fraction 0.25 "
+
+B4: Trích xuất đặc trưng của ảnh và huấn luyện mô hình phân cụm SVM: 
+" src/classifier.py TRAIN Dataset/FaceData/processed Models/20180402-114759.pb Models/facemodel.pkl --batch_size 1000 "
+
+B5: Chạy mô hình:
+" src/face_rec_cam.py "
